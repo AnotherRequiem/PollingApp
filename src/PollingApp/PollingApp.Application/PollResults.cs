@@ -1,8 +1,6 @@
 using System.Text;
 using PollingApp.Entities;
 
-namespace PollingApp.ConsoleClient;
-
 public class PollResults
 {
     private readonly Poll _poll;

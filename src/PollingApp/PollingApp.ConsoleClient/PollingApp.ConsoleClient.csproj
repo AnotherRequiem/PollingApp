@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PollingApp\PollingApp.Entities.csproj" />
+    <ProjectReference Include="..\PollingApp.Application\PollingApp.Application.csproj" />
   </ItemGroup>
 
 </Project>

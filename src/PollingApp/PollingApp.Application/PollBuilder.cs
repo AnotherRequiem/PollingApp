@@ -1,20 +1,18 @@
 using PollingApp.Entities;
 
-namespace PollingApp.ConsoleClient;
-
 public class PollBuilder
 {
     private readonly string _questionText;
-    private readonly List<PollAnswer> _items = new();
+    private readonly List<Answer> _items = new();
 
     public PollBuilder(string questionText)
     {
         _questionText = questionText;
     }
 
-    public PollBuilder AddAnswer(int id, string title)
+    public PollBuilder AddAnswer(Guid id, string title)
     {
-        _items.Add(new PollAnswer(id, title));
+        _items.Add(new Answer(id, title));
         return this;
     }
 

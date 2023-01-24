@@ -1,16 +1,14 @@
-using System.Diagnostics;
+using PollingApp.Entities.Base;
 
 namespace PollingApp.Entities;
 
-public class PollAnswer
+public class Answer : Identity
 {
-    public PollAnswer(int id, string title)
+    public Answer(Guid id, string title)
     {
         Id = id;
         Title = title;
     }
-
-    public int Id { get; }
 
     public string Title { get; }
 
