@@ -4,13 +4,18 @@ namespace PollingApp.Entities;
 
 public class Poll : Identity
 {
-    public Poll(string questionText, List<Answer> answers)
+    public Poll(string questionText, List<Answer> answers) : this(questionText)
     {
         QuestionText = questionText;
         Answers = answers;
     }
 
-    public string QuestionText { get; }
+    private Poll(string questionText)
+    {
+        QuestionText = questionText;
+    }
+
+    public string QuestionText { get; init; }
 
     public List<Answer>? Answers { get; }
 
