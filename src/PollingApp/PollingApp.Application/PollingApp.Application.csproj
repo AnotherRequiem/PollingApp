@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PollingApp\PollingApp.Entities.csproj" />
+    <ProjectReference Include="..\PollingApp.Entities\PollingApp.Entities.csproj" />
   </ItemGroup>
 
 </Project>
