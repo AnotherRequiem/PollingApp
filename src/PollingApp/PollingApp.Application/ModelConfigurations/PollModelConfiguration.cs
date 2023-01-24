@@ -13,7 +13,7 @@ public class PollModelConfiguration : IEntityTypeConfiguration<Poll>
 
         builder.Property(x => x.Id).IsRequired();
         builder.Property(x => x.QuestionText).HasMaxLength(512);
-        
-        builder.HasMany(x => x.Answers)
+
+        builder.HasMany(x => x.Answers);
     }
 }
