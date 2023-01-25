@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PollingApp.Application\PollingApp.Application.csproj" />
+    <ProjectReference Include="..\PollingApp.BlazorLib\PollingApp.BlazorLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Definitions\Base\" />
+    <Folder Include="Definitions\Blazor\" />
     <Folder Include="Definitions\DbContext\" />
     <Folder Include="Definitions\Identity\" />
   </ItemGroup>

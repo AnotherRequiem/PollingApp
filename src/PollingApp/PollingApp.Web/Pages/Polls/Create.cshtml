@@ -1,0 +1,15 @@
+﻿@page
+@using PollingApp.BlazorLib;
+@model PollingApp.Web.Pages.Polls.CreateModel
+@{
+    ViewBag.Title = "Create new poll";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<component type="typeof(Component1)" render-mode="ServerPrerendered"/>
+
+@section Scripts
+{
+    <script src="_framework./blazor.server.js"></script>;
+}
