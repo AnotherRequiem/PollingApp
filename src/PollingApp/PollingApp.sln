@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollingApp.Application", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollingApp.Web", "PollingApp.Web\PollingApp.Web.csproj", "{06974965-9A23-4059-B4D3-E39D38575D33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollingApp.Entities", "PollingApp.Entities\PollingApp.Entities.csproj", "{64E1E253-DBF7-40C8-B672-862F9CC72ABA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollingApp.Entities", "PollingApp.Entities\PollingApp.Entities.csproj", "{64E1E253-DBF7-40C8-B672-862F9CC72ABA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

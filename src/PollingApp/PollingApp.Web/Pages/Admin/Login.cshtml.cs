@@ -5,84 +5,83 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
-namespace PollingApp.Web.Pages.Admin
-{
+namespace PollingApp.Web.Pages.Admin;
+
     public class LoginModel : PageModel
     {
-		private readonly IConfiguration _configuration;
+	private readonly IConfiguration _configuration;
 
-		public LoginModel(IConfiguration configuration)
+	public LoginModel(IConfiguration configuration)
+	{
+		_configuration = configuration;
+	}
+
+	[BindProperty]
+	public InputModel Input { get; set; }
+
+	public string ReturnUrl { get; set; }
+
+	[TempData]
+	public string ErrorMessage { get; set; }
+
+	public class InputModel
+	{
+		[Required]
+		[EmailAddress]
+		public string Email { get; set; } = null!;
+
+		[Required]
+		[DataType(DataType.Password)]
+		public string Password { get; set; } = null!;
+
+		[Display(Name = "Remember me?")]
+		public bool RememberMe { get; set; }
+	}
+
+	public async Task OnGetAsync(string? returnUrl = null)
+	{
+		if (!string.IsNullOrEmpty(ErrorMessage))
 		{
-			_configuration = configuration;
+			ModelState.AddModelError(string.Empty, ErrorMessage);
 		}
 
-		[BindProperty]
-		public InputModel Input { get; set; }
+		returnUrl ??= Url.Content("~/");
+		await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+		ReturnUrl = returnUrl;
+	}
 
-		public string ReturnUrl { get; set; }
+	public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
+	{
+		returnUrl ??= Url.Content("~/");
 
-		[TempData]
-		public string ErrorMessage { get; set; }
-
-		public class InputModel
+		if (!ModelState.IsValid)
 		{
-			[Required]
-			[EmailAddress]
-			public string Email { get; set; } = null!;
-
-			[Required]
-			[DataType(DataType.Password)]
-			public string Password { get; set; } = null!;
-
-			[Display(Name = "Remember me?")]
-			public bool RememberMe { get; set; }
+			return Page();
 		}
 
-		public async Task OnGetAsync(string? returnUrl = null)
-		{
-			if (!string.IsNullOrEmpty(ErrorMessage))
-			{
-				ModelState.AddModelError(string.Empty, ErrorMessage);
-			}
+		var email = _configuration.GetValue<string>("Secret:Login");
+		var password = _configuration.GetValue<string>("Secret:Password");
 
-			returnUrl ??= Url.Content("~/");
-			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-			ReturnUrl = returnUrl;
+		if (password != null && email != null && Input.Password != password || Input.Email != email)
+		{
+			ErrorMessage = "Неверные логин и/или пароль. Не могу пропустить администрировать!";
+			ModelState.AddModelError(string.Empty, ErrorMessage);
+
+			return Page();
 		}
 
-		public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
-		{
-			returnUrl ??= Url.Content("~/");
+		var claims = new List<Claim>
+	{
+		new(ClaimTypes.Email,Input.Email),
+		new(ClaimTypes.GivenName, Input.Email),
+		new(ClaimTypes.NameIdentifier, Input.Email),
+		new(ClaimTypes.Name, Input.Email),
+		new(ClaimTypes.Role, "Administrator")
+	};
+		var claimIdentity = new ClaimsIdentity(claims, "Cookie");
+		var claimPrincipal = new ClaimsPrincipal(claimIdentity);
+		await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal);
 
-			if (!ModelState.IsValid)
-			{
-				return Page();
-			}
-
-			var email = "pollingapp@gmail.com";
-			var password = "123qwe!@#";
-
-			if (password != null && email != null && Input.Password != password || Input.Email != email)
-			{
-				ErrorMessage = "Неверные логин и/или пароль. Не могу пропустить администрировать!";
-				ModelState.AddModelError(string.Empty, ErrorMessage);
-
-				return Page();
-			}
-
-			var claims = new List<Claim>
-		{
-			new(ClaimTypes.Email,Input.Email),
-			new(ClaimTypes.GivenName, Input.Email),
-			new(ClaimTypes.NameIdentifier, Input.Email),
-			new(ClaimTypes.Name, Input.Email),
-			new(ClaimTypes.Role, "Administrator")
-		};
-			var claimIdentity = new ClaimsIdentity(claims, "Cookie");
-			var claimPrincipal = new ClaimsPrincipal(claimIdentity);
-			await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal);
-
-			return Redirect(returnUrl);
-		}
+		return Redirect(returnUrl);
 	}
 }
