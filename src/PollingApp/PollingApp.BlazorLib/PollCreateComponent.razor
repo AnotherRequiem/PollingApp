@@ -1,0 +1,39 @@
+﻿@inherits PollCreateModel
+
+<div class="col">
+    <h3>Создание голосования </h3>
+    <div class="mb-3">
+        <label for="PollText" class="form-label">Tеma для голосования</Label>
+         <input type="text" class="form-control" id="PollText" @bind="QuestionText">
+         <div id="PollTextHelp" class="form-text">допускается текст длиной не более 512 символов</div>
+       </div>
+    <div class="mb-3">
+        <button class="btn btn-outline-info">
+            Добавить ответ
+        </button>       
+    </div>
+    @foreach (var answer in Answers)
+    {
+        <div class="mb-3">
+            <label for="AnswerText1" class="form-label">Tекст ответа 1</label>
+            <input type="text" class="form-control" id="AnswerText1">
+            <div id="AnswerText1Help" class="form-text">Допускается текст длиной не более 512 символов</div>
+        </div>
+    }
+
+</div>
+<div class="col">
+    <h3>Предварительный просмотр </h3>
+    <p class="lead">@QuestionText</p>
+    <ul>
+        @foreach (var answer in Answers)
+       {
+           <li>@answer</li>
+       }
+    </ul>
+</div>
+<div class="mb-3">
+    <button class="btn btn-outline-primary">
+        Сохранить 
+    </button>
+ </div>
