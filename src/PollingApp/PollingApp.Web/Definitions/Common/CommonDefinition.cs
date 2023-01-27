@@ -27,7 +27,5 @@ public class CommonDefinition: AppDefinition
         app.UseAuthorization();
 
         app.MapRazorPages();
-
-        app.Run();
     }
 }

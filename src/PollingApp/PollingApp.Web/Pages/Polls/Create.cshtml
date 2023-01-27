@@ -1,12 +1,12 @@
 ﻿@page
 @using PollingApp.BlazorLib;
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model PollingApp.Web.Pages.Polls.CreateModel
 @{
     <component type="typeof(PollCreateComponent)" render-mode="ServerPrerendered"/>
-
 }
 
 @section Scripts
 {
-    <script src="_framework./blazor.server.js"></script>;
+    <script src="_framework/blazor.server.js"></script>;
 }
