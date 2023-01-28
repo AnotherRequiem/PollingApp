@@ -17,9 +17,11 @@
     <Folder Include="Definitions\Blazor\" />
     <Folder Include="Definitions\DbContext\" />
     <Folder Include="Definitions\Identity\" />
+    <Folder Include="Definitions\UnitOfWork\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Calabonga.UnitOfWork" Version="3.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
