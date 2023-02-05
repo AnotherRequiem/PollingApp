@@ -1,23 +1,20 @@
 using Microsoft.AspNetCore.Components;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Options;
+using PollingApp.Contracts;
+using Calabonga.OperationResults;
 
 namespace PollingApp.BlazorLib;
 
 public class PollCreateModel : ComponentBase
 {
+    [Inject] protected IPollService PollService { get; set; } = null!;
     public List<string> Errors { get; } = new();
+    public OperationResult<SaveResult>? Result { get; set; }
 
-    public string? QuestionText { get; set; } = "How are u today?";
+    public string? QuestionText { get; set; }
 
-    public List<AnswerInput> Answers { get; set; } = new()
-    {
-        new AnswerInput{Text = "Fine" },
-        new AnswerInput{Text = "Not bad" },
-        new AnswerInput{Text = "Awesome" },
-        new AnswerInput{Text = "Not god at all" },
-        new AnswerInput{Text = "Alright" }
-    };
+    public List<AnswerInput> Answers { get; set; } = new List<AnswerInput>();
 
     public bool IsValid =>
         !string.IsNullOrEmpty(QuestionText)
@@ -49,17 +46,25 @@ public class PollCreateModel : ComponentBase
         }
     }
 
-    protected Task SaveAnswer()
+    protected async Task SaveAnswer()
     {
         Validate();
         if (Errors.Any())
         {
-            return Task.CompletedTask;
+            return;
         }
 
-        // save to DB
+        var cancellationTokenSource = new CancellationTokenSource();
+        cancellationTokenSource.CancelAfter(5000);
 
-        return Task.CompletedTask;
+        Result = await PollService.SaveAsync(QuestionText!, Answers.Select(
+            x => x.Text).ToList()!, cancellationTokenSource.Token);
+        if (Result.Ok)
+        {
+            QuestionText = null;
+            Errors.Clear();
+            Answers.Clear();        
+        }
     }
 
     private IEnumerable<ValidationResult> ValidatePoll()
@@ -115,5 +120,5 @@ public class PollCreateModel : ComponentBase
 public class AnswerInput
 {
     public string? Text { get; set; }
-    
+
 }

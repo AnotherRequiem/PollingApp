@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollingApp.Web", "PollingAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollingApp.Entities", "PollingApp.Entities\PollingApp.Entities.csproj", "{64E1E253-DBF7-40C8-B672-862F9CC72ABA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollingApp.BlazorLib", "PollingApp.BlazorLib\PollingApp.BlazorLib.csproj", "{96C977A6-F630-4DF8-9340-7F71CE6685A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollingApp.BlazorLib", "PollingApp.BlazorLib\PollingApp.BlazorLib.csproj", "{96C977A6-F630-4DF8-9340-7F71CE6685A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollingApp.Contracts", "PollingApp.Contracts\PollingApp.Contracts.csproj", "{A3C98627-BC18-4CE8-AAC8-1CA659D72BF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{96C977A6-F630-4DF8-9340-7F71CE6685A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96C977A6-F630-4DF8-9340-7F71CE6685A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96C977A6-F630-4DF8-9340-7F71CE6685A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3C98627-BC18-4CE8-AAC8-1CA659D72BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C98627-BC18-4CE8-AAC8-1CA659D72BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C98627-BC18-4CE8-AAC8-1CA659D72BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C98627-BC18-4CE8-AAC8-1CA659D72BF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

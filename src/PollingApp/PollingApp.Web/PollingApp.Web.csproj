@@ -10,12 +10,14 @@
   <ItemGroup>
     <ProjectReference Include="..\PollingApp.Application\PollingApp.Application.csproj" />
     <ProjectReference Include="..\PollingApp.BlazorLib\PollingApp.BlazorLib.csproj" />
+    <ProjectReference Include="..\PollingApp.Contracts\PollingApp.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Definitions\Base\" />
     <Folder Include="Definitions\Blazor\" />
     <Folder Include="Definitions\DbContext\" />
+    <Folder Include="Definitions\DependencyContainer\" />
     <Folder Include="Definitions\Identity\" />
     <Folder Include="Definitions\UnitOfWork\" />
   </ItemGroup>
@@ -26,6 +28,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="OperationResultCore" Version="4.0.1" />
   </ItemGroup>
 
 </Project>

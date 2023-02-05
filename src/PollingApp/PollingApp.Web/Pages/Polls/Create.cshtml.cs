@@ -7,7 +7,7 @@ namespace PollingApp.Web.Pages.Polls;
 [Authorize]
 public class CreateModel : PageModel
 {
-    public void NoGet()
+    public void OnGet()
     {
 
     }
